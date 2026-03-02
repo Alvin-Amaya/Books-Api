@@ -57,7 +57,7 @@ namespace Books_Api.Features
 
         public Book GetBookById(int id)
         {
-            return _books.Where(x => x.Id == id).First();
+            return _books.Where(x => x.Id == id).FirstOrDefault();
         }
     
         public void AddBook(Book book)

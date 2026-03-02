@@ -28,7 +28,9 @@ namespace Books_Api.Controllers
         [HttpGet("{id}")]
         public IActionResult Get([FromRoute] int id)
         {
-            return Ok(_booksAppService.GetBookById(id));
+            Book book = _booksAppService.GetBookById(id);
+            if (book == null) return NotFound("Book not found");
+            return Ok(book);
         }
 
         // POST api/<BooksController>
