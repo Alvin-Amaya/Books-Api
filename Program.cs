@@ -1,3 +1,7 @@
+// Alvin Asael Amaya Pineda | 20241930068
+
+using Books_Api.Features;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+builder.Services.AddSingleton<BooksAppService>();
 
 var app = builder.Build();
 
