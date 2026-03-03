@@ -5,6 +5,7 @@ namespace Books_Api.Features
     public class BooksAppService
     {
         private List<Book> _books = new();
+        private BooksDomainService _booksDomainService;
 
         public BooksAppService() 
         {
@@ -48,6 +49,8 @@ namespace Books_Api.Features
                 Date = new DateTime(1985, 7, 1),
                 Description = "A textbook on computer programming and software engineering."
             });
+
+            _booksDomainService = new BooksDomainService();
         }
 
         public List<Book> GetBooks()
@@ -55,15 +58,15 @@ namespace Books_Api.Features
             return _books;
         }
 
-        public Book GetBookById(int id)
+        public Book? GetBookById(int id)
         {
             return _books.Where(x => x.Id == id).FirstOrDefault();
         }
     
         public void AddBook(Book book)
         {
-            if (string.IsNullOrEmpty(book.Title)) return;
-            _books.Add(book);
+            if (_booksDomainService.ValidateBook(book)) 
+                _books.Add(book);
         }
     
         public void UpdateBook(int id, Book updatedBook)
